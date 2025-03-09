@@ -99,20 +99,26 @@ for (i=0;i<arr.length;i++){
   img_wrong_diffstory.push(ordered_img[arr[i]][0])
 }
 
+var img_left = []
+var img_mid = []
+var img_right = []
+
+
+
 for (i=0;i<img_correct.length;i++){
   var random_num = Math.floor(Math.random()*3)
   if (random_num ==0){
-    img_left = img_correct
-    img_mid = img_wrong_diffstory
-    img_right = img_wrong_samestory
+    img_left.push(img_correct[i])
+    img_mid.push(img_wrong_diffstory[i])
+    img_right.push(img_wrong_samestory[i])
   } else if (random_num ==1){
-    img_left = img_wrong_diffstory
-    img_mid = img_correct
-    img_right = img_wrong_samestory
+    img_left.push(img_wrong_diffstory[i])
+    img_mid.push(img_correct[i])
+    img_right.push(img_wrong_samestory[i])
   } else if (random_num ==2){
-    img_left = img_wrong_samestory
-    img_mid = img_wrong_diffstory
-    img_right = img_correct
+    img_left.push(img_wrong_samestory[i])
+    img_mid.push(img_wrong_diffstory[i])
+    img_right.push(img_correct[i])
   }
 }
 

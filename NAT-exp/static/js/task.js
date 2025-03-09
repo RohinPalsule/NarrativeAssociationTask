@@ -204,7 +204,7 @@ for (i=0;i<num_learn_trials;i++) {
 
 timelinepushintro(intro_dir,dir_instructnames)
 curr_direct_trial = 0
-
+dataTrial = 0
 for (i=0;i<img_correct.length;i++) {
   var association_phase = {
     type: 'html-keyboard-response',
@@ -219,14 +219,55 @@ for (i=0;i<img_correct.length;i++) {
     },
     on_finish: function(data){
       data.trial_type = 'Association'
+      data.stimulus=img_top[dataTrial];
+      data.stimulus_down_left=img_left[dataTrial],
+      data.stimulus_down_mid=img_mid[dataTrial]
+      data.stimulus_down_right=img_right[dataTrial];
+      data.stimulus_correct=img_correct[dataTrial];
+      data.stimulus_short=img_wrong_samestory[dataTrial];
+      data.stimulus_far=img_wrong_diffstory[dataTrial];
+      if ((data.key_press == 49 && data.stimulus_down_left == data.stimulus_correct)||
+      (data.key_press == 50 && data.stimulus_down_mid == data.stimulus_correct) ||(data.key_press == 51 && data.stimulus_down_right == data.stimulus_correct)) {
+        console.log(data.key_press)
+        console.log(img_left[dataTrial])
+        console.log(data.stimulus_correct)
+        data.accuracy = 1
+        directcorrectness.push(1)
+        data.weighted_accuracy = 1
+      } else {
+        data.accuracy = 0
+        directcorrectness.push(0)
+        data.weighted_accuracy = 0
+      }
+      console.log(data.key_press)
+      console.log(img_left[dataTrial])
+      console.log(data.stimulus_correct)
+      if ((data.key_press == 49 && data.stimulus_down_left == data.stimulus_short)||
+      (data.key_press == 50 && data.stimulus_down_mid == data.stimulus_short) ||(data.key_press == 51 && data.stimulus_down_right == data.stimulus_short)) {
+        data.missedtrial = 'closer'
+        data.weighted_accuracy = 0.5
+      } else if ((data.key_press == 49 && data.stimulus_down_left == data.stimulus_far)||
+      (data.key_press == 50 && data.stimulus_down_mid == data.stimulus_far) ||(data.key_press == 51 && data.stimulus_down_right == data.stimulus_far)) {
+        data.missedtrial = 'closer'
+        data.weighted_accuracy = 0.5
+      }
+      dataTrial +=1
+      let directsum = 0;
+      directcorrectness.forEach(function(value) {
+        directsum += value;
+      });
+
+      data.cumulative_accuracy = directsum / directcorrectness.length;
+      accuracy = data.cumulative_accuracy 
       
     }
   }
   curr_direct_trial += 1
   timeline.push(association_phase)
 }
-
-
+console.log(accuracy)
+var directcorrectness = []
+var accuracy = []
 let recog_trial_num = 0
 let on_finish_num = 0
 let correctResp = []
@@ -419,24 +460,80 @@ var thank_you = {
   type: 'html-keyboard-response',
   choices: ['space'],
   stimulus: "<p> Congratulations, you are all done!</p><p>The secret code to enter at the beginning screen is: AJFHBG897</p><p> Please make sure to submit the HIT and email uciccnl@gmail.com if you had any issues! </p>",
+  on_load: function() {
+    dictionary = {
+      "ID":subject_id,
+      "Story_Reconstruction": userStory,
+      "ImgListTop": img_top,
+      "ImgListLeft": img_left,
+      "ImgListMid": img_mid,
+      "ImgListRight": img_right,
+      "ImgListCorrect": img_correct,
+      "Correct": directcorrectness,
+      "Accuracy": accuracy
+    }
+    downloadCSVFromObject(`${subject_id}.csv`, dictionary);
+  },
   on_finish: function (data) {
     data.trial_type = 'thank_you';
     data.detectfocus = detectfocus;
     save_data(true)
   }
 }
-
+var dictionary = {}
 timeline.push(thank_you);
 
 //time line here
+
+
+function downloadCSVFromObject(filename, dataObj) {
+  // Extract column names (keys of the object)
+  let columnNames = Object.keys(dataObj);
+  
+  // Determine the number of rows from the longest array (if arrays exist)
+  let numRows = Math.max(...Object.values(dataObj).map(val => Array.isArray(val) ? val.length : 1));
+
+  // Create CSV content
+  let csvContent = columnNames.join(",") + "\n"; // Column headers
+
+  // Construct rows
+  for (let i = 0; i < numRows; i++) {
+      let rowData = columnNames.map(col => {
+          let value = dataObj[col];
+          if (Array.isArray(value)) {
+              return value[i] ?? ""; // Take the i-th value if it's an array
+          } else {
+              return i === 0 ? value : ""; // Only put single values in the first row
+          }
+      });
+      csvContent += rowData.join(",") + "\n";
+  }
+
+  // Create Blob and trigger download
+  let blob = new Blob([csvContent], { type: "text/csv" });
+  let url = URL.createObjectURL(blob);
+  
+  let a = document.createElement("a");
+  a.href = url;
+  a.download = filename;
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+  URL.revokeObjectURL(url);
+}
+let dataDict = {
+  "Name": ["Alice", "Bob", "Charlie"],
+  "Age": [25, 30, 35],
+  "City": ["New York", "San Francisco", "Los Angeles"]
+};
+
+
 
 jsPsych.init({
   timeline: timeline,
   preload_images: all_images,
   max_load_time: 600000,
   on_finish: function () {
-    /* Retrieve the participant's data from jsPsych */
-    // Determine and save participant bonus payment
     psiturk.recordUnstructuredData("subject_id", subject_id);
     save_data(true)
   },
