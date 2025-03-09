@@ -41,6 +41,63 @@ function createStoryBox(storyText,trial) {
       <br><br>
   `;
 }
+
+function createStoryWritingBox() {
+  return `
+      <div style="
+          width: 70%;
+          background: white;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+          text-align: justify;
+          margin: auto;
+      ">
+          <div style="
+              text-align: center;
+              font-size: 24px;
+              font-weight: bold;
+              margin-bottom: 15px;
+          ">
+              Please recall all the stories you read in as much detail as possible. Please type "END" when you finish one story and move on to the next one.
+          </div>
+          <textarea id="story-input" rows="8" style="
+              width: 100%;
+              font-size: 18px;
+              line-height: 1.6;
+              padding: 10px;
+              border: 1px solid #ccc;
+              border-radius: 5px;
+              resize: none;
+          " placeholder="Start typing your story here..."></textarea>
+
+          <br><br>
+          <button id="confirm-btn" style="
+              font-size: 18px;
+              padding: 10px 20px;
+              border: none;
+              background-color: #007bff;
+              color: white;
+              border-radius: 5px;
+              cursor: pointer;
+          ">Confirm Response</button>
+
+          <button id="continue-btn" style="
+              font-size: 18px;
+              padding: 10px 20px;
+              border: none;
+              background-color: #28a745;
+              color: white;
+              border-radius: 5px;
+              cursor: pointer;
+              display: none;
+              margin-top: 10px;
+          ">Continue</button>
+      </div>
+  `;
+}
+
+
 function create_image_recognition(presented_img, trial_num) {
   return parse("<p style='position:absolute;top: 20%;right: 50%;transform: translate(50%, -50%);font-size: 25px;color:black;'>Is this image <strong>Old</strong> or <strong>New</strong>?</p><img style='position:absolute;top: 50%;right: 50%;transform: translate(50%, -50%);z-score:0;width: 250px;height: 250px;' src='../static/images/%s' height='250'></style><p style='position:absolute;top: 80%;right: 50%;transform: translate(50%, -50%);font-size: 25px;color:black;'>Press '1' for <strong>Old</strong> and '2' for <strong>New</strong>.</p>"
   ,presented_img[trial_num])

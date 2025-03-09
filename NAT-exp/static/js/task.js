@@ -168,15 +168,64 @@ for (i=0;i<num_learn_trials;i++) {
     stimulus:createStoryBox(story_text,trial_num),
     on_finish: function(data) {
       data.trial_type = 'story_text';
-      data.stimulus= learn_img[trial_num]
-      data.image_type = shuffled_learn_img_type[trial_num]
     }
   }
   timeline.push(learn_phase)
   trial_num += 1
 }
 
-// timelinepushintro(intro_dir,dir_instructnames)
+  var write_phase = {
+    type: 'html-button-response',
+    choices: [],
+    stimulus:createStoryWritingBox(),
+    on_load: function() {
+      document.getElementById("confirm-btn").addEventListener("click", function() {
+          // Save user input
+          userStory = document.getElementById("story-input").value;
+
+          // Hide the confirm button, show the continue button
+          document.getElementById("confirm-btn").style.display = "none";
+          document.getElementById("continue-btn").style.display = "inline-block";
+      });
+
+      document.getElementById("continue-btn").addEventListener("click", function() {
+          // Manually finish the jsPsych trial
+          jsPsych.finishTrial({
+              trial_type: "story_text",
+              story_response: userStory
+          });
+      });
+    },
+    on_finish: function(data) {
+      data.trial_type = 'story_text';
+    }
+  }
+  timeline.push(write_phase)
+
+timelinepushintro(intro_dir,dir_instructnames)
+curr_direct_trial = 0
+
+for (i=0;i<img_correct.length;i++) {
+  var association_phase = {
+    type: 'html-keyboard-response',
+    choices: ['1','2','3'],
+    stimulus:create_direct_trial(img_top,img_left,img_mid,img_right,curr_direct_trial),
+    on_load: function(){
+      setTimeout(function() {
+        for(let i = 0;i<document.getElementsByClassName('bottom').length;i++){
+          document.getElementsByClassName('bottom')[i].style.visibility = 'visible';
+        }
+      }, 500);
+    },
+    on_finish: function(data){
+      data.trial_type = 'Association'
+      
+    }
+  }
+  curr_direct_trial += 1
+  timeline.push(association_phase)
+}
+
 
 let recog_trial_num = 0
 let on_finish_num = 0

@@ -3,6 +3,7 @@ debugmode= true
 if (debugmode==true){
   num_learn_trials = 2
   num_recognition_trials = 5
+  num_write_trials = 1
 }else{
   num_learn_trials = 25
   num_recognition_trials = 50
@@ -13,29 +14,45 @@ n_shortest_trial=10 //how many shortest path you want
 n_goaldir_trial=10 //how many goal directed planning you want
 //warningpage
 warning=0 //this is to start the counter of total warning
-warning_1="<div style='margin-left:200px ;margin-right: 200px ;text-justify: auto'><p style ='font-size: 50px;line-height:1.5;color:red'>Warning, you are missing too many trials, make sure to press the key '1' when you see a blue cross flash and '2' when you see a green one. If you keep missing trials you will be disqualified.</p>",
+warning_1="<div style='margin-left:200px ;margin-right: 200px ;text-justify: auto'><p style ='font-size: 40px;line-height:1.5;color:red'>Warning, you are missing too many trials, make sure to press the key '1' when you see a blue cross flash and '2' when you see a green one. If you keep missing trials you will be disqualified.</p>",
 checkfail=0 //this is to start the attentioncheck
 checkthreshold=2 //this is to add the threshold for attentioncheck
 
 //Text for instruction
-instruct_1="<div style='margin-left:200px ;margin-right: 200px ;text-justify: auto'><p style ='font-size: 55px;margin-bottom:40px'><b>Welcome!</b></p><p style ='font-size: 50px;line-height:1.5'>In this experiment, you will be presented with a series of stories. Your goal is to read these stories and try to remember them in as much detail as you can.</p><p style= 'font-size:25px;margin-top:100px'>[press the spacebar to continue]</p>",
-//instruct_2="<div style='margin-left:200px ;margin-right: 200px ;text-justify: auto'><p style ='font-size: 50px;line-height:1.5'>After the story is presented, you will be asked to recall the story as it was presented to you with as much detail as possible. You will see a button on your screen to record your audio responses, so please be sure to speak as clear as you can.</p><p style= 'font-size:25px;margin-top:100px'>[press the spacebar to continue]</p>",
-instruct_2="<div style='margin-left:200px ;margin-right: 200px ;text-justify: auto'><p style ='font-size: 50px;line-height:1.5'>After the story is presented, you will be asked to recall the story by typing what you read as it was presented to you with as much detail as possible.</p><p style= 'font-size:25px;margin-top:100px'>[press the spacebar to continue]</p>",
-instruct_3="<div style='margin-left:200px ;margin-right: 200px ;text-justify: auto'><p style ='font-size: 50px;line-height:1.5'>These stories will be presented to you one at a time. When you have read the story, please press the continue button on your screen.</p><p style= 'font-size:25px;margin-top:100px'>[press the spacebar to start the experiment]</p>",
+instruct_1="<div style='margin-left:200px ;margin-right: 200px ;text-justify: auto'><p style ='font-size: 55px;margin-bottom:40px'><b>Welcome!</b></p><p style ='font-size: 40px;line-height:1.5'>In this experiment, you will be presented with a series of stories. Your goal is to read these stories and try to remember them in as much detail as you can.</p><p style= 'font-size:25px;margin-top:100px'>[press the spacebar to continue]</p>",
+//instruct_2="<div style='margin-left:200px ;margin-right: 200px ;text-justify: auto'><p style ='font-size: 40px;line-height:1.5'>After the story is presented, you will be asked to recall the story as it was presented to you with as much detail as possible. You will see a button on your screen to record your audio responses, so please be sure to speak as clear as you can.</p><p style= 'font-size:25px;margin-top:100px'>[press the spacebar to continue]</p>",
+instruct_2="<div style='margin-left:200px ;margin-right: 200px ;text-justify: auto'><p style ='font-size: 40px;line-height:1.5'>After the story is presented, you will be asked to recall the story by typing what you read as it was presented to you with as much detail as possible.</p><p style= 'font-size:25px;margin-top:100px'>[press the spacebar to continue]</p>",
+instruct_3="<div style='margin-left:200px ;margin-right: 200px ;text-justify: auto'><p style ='font-size: 40px;line-height:1.5'>These stories will be presented to you one at a time. When you have read the story, please press the continue button on your screen.</p><p style= 'font-size:25px;margin-top:100px'>[press the spacebar to start the experiment]</p>",
 
 instructnames = ["instruct_1","instruct_2","instruct_3"]// IF you want to add or decrease number of page for instruct, just delete or add var name here.
 let instruct={instruct_1,instruct_2,instruct_3} // IF you want to add or decrease number of page for instruct, just delete or add var here.
 
 
 //Text for direct memory instruction
-instruct_dir_1="<div style='margin-left:200px ;margin-right: 200px ;text-justify: auto'><p style ='font-size: 50px;line-height:1.5'>For this next portion, you will continue to make image ratings, but we will also test you on your memory for what you saw before.</p><p style= 'font-size:25px;margin-top:100px'>[press the spacebar to continue]</p>",
-instruct_dir_2="<div style='margin-left:200px ;margin-right: 200px ;text-justify: auto'><p style ='font-size: 50px;line-height:1.5'>On each trial, you will be presented with an image. In addition to providing ratings as you’ve done before, you will be asked to indicate if this is an image you’ve seen before in the previous phase, or a new image you are seeing for the first time.</p><p style= 'font-size:25px;margin-top:100px'>[press the spacebar to continue]</p>",
-instruct_dir_3 = "<div style='margin-left:200px ;margin-right: 200px ;text-justify: auto'><p style ='font-size: 50px;line-height:1.5'>If the image is <strong>OLD</strong> (what you have seen before) press '1'. If it is <strong>NEW</strong> press '2'. If you are unsure, make your best guess. You will also be asked about how confident you are in your response.</p><p style= 'font-size:25px;margin-top:100px'>[press the spacebar to continue]</p>",
-// instruct_dir_4 = "<div style='margin-left:200px ;margin-right: 200px ;text-justify: auto'><p style ='font-size: 50px;line-height:1.5'>You will only have a couple of seconds to respond to every trial, so try to respond as quickly and as accurately as possible.</p><p style= 'font-size:25px;margin-top:100px'>[press the spacebar to start]</p>",
-dir_instructnames = ["instruct_dir_1","instruct_dir_2","instruct_dir_3"] //Same for above, if you want to delete or add, just decrease or add the var
-dir_instruct={instruct_dir_1,instruct_dir_2,instruct_dir_3} //same for above
+
+// COULD ADD A CHOICE WHERE THEY PICK WHICH STORY IT IS FROM
+instruct_dir_1="<div style='margin-left:200px ;margin-right: 200px ;text-justify: auto'><p style ='font-size: 40px;line-height:1.5'>For this next portion, you will once again be tested on your memory of these stories, but this time on specific objects present in each of them.</p><p style= 'font-size:25px;margin-top:100px'>[press the spacebar to continue]</p>",
+instruct_dir_2="<div style='margin-left:200px ;margin-right: 200px ;text-justify: auto'><p style ='font-size: 40px;line-height:1.5'>These narratives all included specific objects that were related to each other in some way. In this phase, you will see an image of one of those objects and are tasked with choosing an image out of the options given that is the most connected to the top one. This means you may see objects from the same story, different stories, or completely new items.</p><p style= 'font-size:25px;margin-top:100px'>[press the spacebar to continue]</p>",
+instruct_dir_3 = "<div style='margin-left:200px ;margin-right: 200px ;text-justify: auto'><p style ='font-size: 40px;line-height:1.5'>A reminder that the goal is not just to remember which items went together in the same story, as you might see multiple options from the same story. Instead, you want to select which object is the most closely related to the top image, or in other words reqires the fewest associations to relate the two in the context of the story.</p><p style= 'font-size:25px;margin-top:100px'>[press the spacebar to continue]</p>",
+instruct_dir_4 = "<div style='margin-left:200px ;margin-right: 200px ;text-justify: auto'><p style ='font-size: 40px;line-height:1.5'>There will be 3 possible images to choose from. If it is the image on the left, press '1' on your keyboard. If it is the middle one, press '2'. If it is the right image, press '3'. You will have as much time as you need to respond but please still respond as quickly and as accurately as possible.</p><p style= 'font-size:25px;margin-top:100px'>[press the spacebar to continue]</p>",
+// instruct_dir_4 = "<div style='margin-left:200px ;margin-right: 200px ;text-justify: auto'><p style ='font-size: 40px;line-height:1.5'>You will only have a couple of seconds to respond to every trial, so try to respond as quickly and as accurately as possible.</p><p style= 'font-size:25px;margin-top:100px'>[press the spacebar to start]</p>",
+dir_instructnames = ["instruct_dir_1","instruct_dir_2","instruct_dir_3","instruct_dir_4"] //Same for above, if you want to delete or add, just decrease or add the var
+dir_instruct={instruct_dir_1,instruct_dir_2,instruct_dir_3,instruct_dir_4} //same for above
 
 //learning phase
+
+
+movie_imgs = []
+for (i=1;i<11;i++){
+  if (i<10){
+    movie_imgs.push(`nat-0${i}.png`)
+  }else {
+    movie_imgs.push(`nat-${i}.png`) 
+  }}
+
+ordered_img = [[movie_imgs[0],movie_imgs[1]],[movie_imgs[1],movie_imgs[2]],[movie_imgs[2],movie_imgs[3]],[movie_imgs[3],movie_imgs[4]]]
+ordered_img2 = [[movie_imgs[5],movie_imgs[6]],[movie_imgs[6],movie_imgs[7]],[movie_imgs[7],movie_imgs[8]],[movie_imgs[8],movie_imgs[9]]]
+
 
 function shuffle(array) {
   for (let i = array.length - 1; i > 0; i--) {
@@ -45,109 +62,59 @@ function shuffle(array) {
   return array;
 }
 
-let img_mm_list = []
-let unshuffled_img_type = []
+let arr = []
 
-for (i=1;i<31;i++){
-  if (i<10){
-    img_mm_list.push(`img_manmade_0${i}.png`)
-    unshuffled_img_type.push("MM")
-  } else {
-    img_mm_list.push(`img_manmade_${i}.png`)
-    unshuffled_img_type.push("MM")
+for (i=0;i<ordered_img.length;i++){
+  arr.push(i)
+}
+shuffle(arr)
+
+let img_top = []
+let img_correct = []
+let img_wrong_samestory = []
+let img_wrong_diffstory = []
+for (i=0;i<arr.length;i++){
+  img_top.push(ordered_img[arr[i]][0])
+  img_correct.push(ordered_img[arr[i]][1])
+  var num = Math.floor(Math.random()*5)
+  wrong = movie_imgs[num]
+  while (wrong == img_correct[i] || wrong == img_top[i]){
+    num = Math.floor(Math.random()*5)
+    wrong = movie_imgs[num]
+  }
+  img_wrong_samestory.push(wrong)
+  img_wrong_diffstory.push(ordered_img2[arr[i]][0])
+}
+
+for (i=0;i<arr.length;i++){
+  img_top.push(ordered_img2[arr[i]][0])
+  img_correct.push(ordered_img2[arr[i]][1])
+  var num = Math.floor(Math.random()*5) + 5
+  wrong = movie_imgs[num]
+  while (wrong == img_correct[i+4] || wrong == img_top[i+4]){
+    num = Math.floor(Math.random()*5) + 5
+    wrong = movie_imgs[num]
+  }
+  img_wrong_samestory.push(wrong)
+  img_wrong_diffstory.push(ordered_img[arr[i]][0])
+}
+
+for (i=0;i<img_correct.length;i++){
+  var random_num = Math.floor(Math.random()*3)
+  if (random_num ==0){
+    img_left = img_correct
+    img_mid = img_wrong_diffstory
+    img_right = img_wrong_samestory
+  } else if (random_num ==1){
+    img_left = img_wrong_diffstory
+    img_mid = img_correct
+    img_right = img_wrong_samestory
+  } else if (random_num ==2){
+    img_left = img_wrong_samestory
+    img_mid = img_wrong_diffstory
+    img_right = img_correct
   }
 }
-let img_nat_list = []
-
-for (i=1;i<31;i++){
-  if (i<10){
-    img_nat_list.push(`img_natural_0${i}.png`)
-    unshuffled_img_type.push("NAT")
-  } else {
-    img_nat_list.push(`img_natural_${i}.png`)
-    unshuffled_img_type.push("NAT")
-  }
-}
-
-let nat_arr = []
-let mm_arr = []
-
-for (let i = 0; i < img_mm_list.length;i++){
-  mm_arr.push(i)
-  nat_arr.push(i)
-}
-
-shuffle(mm_arr);
-shuffle(nat_arr);
-
-let mm_list_shuff = []
-let nat_list_shuff = []
-let unshuffled_img_type_learn = []
-
-for (let i = 0; i < img_mm_list.length;i++){
-  mm_list_shuff.push(img_mm_list[mm_arr[i]])
-  nat_list_shuff.push(img_nat_list[nat_arr[i]])
-}
-
-first_phase_unshuffled = mm_list_shuff.slice(0,15).concat(nat_list_shuff.slice(0,15))
-unshuffled_img_type_learn = unshuffled_img_type.slice(0,15).concat(unshuffled_img_type.slice(30,45))
-
-new_img_unshuffled = mm_list_shuff.slice(15).concat(nat_list_shuff.slice(15))
-unshuffled_img_type = unshuffled_img_type_learn.concat(unshuffled_img_type.slice(15,30),unshuffled_img_type.slice(45,60))
-
-
-var recognition_unshuffled = first_phase_unshuffled.concat(new_img_unshuffled);
-let slice_recognition_list = []
-let recognition_list = [];
-let recog_arr = [];
-
-let new_old_unshuff = []
-let new_old = []
-let shuffled_img_type = []
-
-
-
-
-for (let i = 0; i < recognition_unshuffled.length; i++) {
-  recog_arr.push(i);
-  if (i < 30){
-    new_old_unshuff.push("OLD")
-  }else {
-    new_old_unshuff.push("NEW")
-  }
-}
-shuffle(recog_arr)
-for (let i = 0; i < recognition_unshuffled.length;i++){
-  recognition_list.push(recognition_unshuffled[recog_arr[i]])
-  new_old.push(new_old_unshuff[recog_arr[i]])
-  shuffled_img_type.push(unshuffled_img_type[recog_arr[i]])
-}
-
-let learn_unshuffled = first_phase_unshuffled
-let foil_unshuffled = new_img_unshuffled
-
-let shuffled_learn_img_type = []
-let learn_img = [];
-let learn_arr = [];
-for (let i = 0; i < learn_unshuffled.length; i++) {
-  learn_arr.push(i);
-}
-shuffle(learn_arr)
-for (let i = 0; i < learn_unshuffled.length;i++){
-  learn_img.push(learn_unshuffled[learn_arr[i]])
-  shuffled_learn_img_type.push(unshuffled_img_type_learn[learn_arr[i]])
-}
-
-let foil_img = [];
-let foil_arr = [];
-for (let i = 0; i < foil_unshuffled.length; i++) {
-  foil_arr.push(i);
-}
-shuffle(foil_arr)
-for (let i = 0; i < foil_unshuffled.length;i++){
-  foil_img.push(foil_unshuffled[foil_arr[i]])
-}
-
 
 
 let story_text = [`
@@ -169,5 +136,3 @@ let story_text = [`
   <br><br>The train whistle blew in the distance. She looked at the torn ticket. Then at the lantern. Then at the box.
   <br><br>She had a choice to make.
   <br><br>And she knew, deep down, that whatever she chose… the house was waiting.`]
-
-
