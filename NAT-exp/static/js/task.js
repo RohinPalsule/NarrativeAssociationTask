@@ -32,7 +32,7 @@ var subject_id = jsPsych.randomization.randomID(8);
 // Load PsiTurk
 var psiturk = new PsiTurk(uniqueId, adServerLoc, mode);
 var condition = psiturk.taskdata.get('condition') + 1; // they do zero-indexing
-
+var stimulus_chosen =[]
 var timeline = []
 
 //welcome page
@@ -226,6 +226,13 @@ for (i=0;i<img_correct.length;i++) {
       data.stimulus_correct=img_correct[dataTrial];
       data.stimulus_short=img_wrong_samestory[dataTrial];
       data.stimulus_far=img_wrong_diffstory[dataTrial];
+      if (data.key_press == 49){
+        stimulus_chosen.push(data.stimulus_down_left)
+      } else if (data.key_press == 50){
+        stimulus_chosen.push(data.stimulus_down_mid)
+      } else if (data.key_press == 51){
+        stimulus_chosen.push(data.stimulus_down_right)
+      }
       if ((data.key_press == 49 && data.stimulus_down_left == data.stimulus_correct)||
       (data.key_press == 50 && data.stimulus_down_mid == data.stimulus_correct) ||(data.key_press == 51 && data.stimulus_down_right == data.stimulus_correct)) {
         console.log(data.key_press)
@@ -469,6 +476,7 @@ var thank_you = {
       "ImgListMid": img_mid,
       "ImgListRight": img_right,
       "ImgListCorrect": img_correct,
+      "ImgListSelected": stimulus_chosen,
       "Correct": directcorrectness,
       "Accuracy": accuracy
     }
@@ -521,12 +529,6 @@ function downloadCSVFromObject(filename, dataObj) {
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
 }
-let dataDict = {
-  "Name": ["Alice", "Bob", "Charlie"],
-  "Age": [25, 30, 35],
-  "City": ["New York", "San Francisco", "Los Angeles"]
-};
-
 
 
 jsPsych.init({
